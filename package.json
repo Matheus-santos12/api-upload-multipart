@@ -1,0 +1,24 @@
+{
+  "name": "api-upload-multipart",
+  "version": "1.0.0",
+  "description": "Api de upload com multipart",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "Matheus Santos",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1045.0",
+    "@fastify/multipart": "^10.0.0",
+    "fastify": "^5.8.5"
+  }
+}
