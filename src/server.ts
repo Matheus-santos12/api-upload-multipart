@@ -1,6 +1,10 @@
 import multipart from "@fastify/multipart";
 import Fastify from "fastify";
-import { fileRoutes } from "./routes/file-routes.js";
+import { bootstrap } from "fastify-decorators";
+import FileController from "./controllers/file-controller.js";
+import { registerDependencies } from "./di-registry.js";
+
+registerDependencies();
 
 const app = Fastify({
   logger: true,
@@ -11,6 +15,6 @@ app.get("/", function (request, reply) {
 });
 
 app.register(multipart);
+app.register(bootstrap, { controllers: [FileController] });
 
-await app.register(fileRoutes);
 await app.listen({ port: 3333 });
