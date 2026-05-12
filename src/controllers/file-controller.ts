@@ -16,7 +16,11 @@ export default class FileController {
     if (!data) {
       return reply.status(400).send({ message: "Nenhum arquivo foi enviado" });
     }
-    const file = { name: data.filename, size: 0, stream: data.file };
+    const file = {
+      name: data.filename,
+      size: data.file.readableLength ?? 0,
+      stream: data.file,
+    };
     const result = await this.storage.upload(file);
     this.metaData.push(result);
     reply.status(201).send(result);

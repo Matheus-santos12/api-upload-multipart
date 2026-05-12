@@ -1,4 +1,5 @@
 import multipart from "@fastify/multipart";
+import "dotenv/config";
 import Fastify from "fastify";
 import { bootstrap } from "fastify-decorators";
 import FileController from "./controllers/file-controller.js";

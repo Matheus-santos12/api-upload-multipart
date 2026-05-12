@@ -6,22 +6,24 @@ import {
 import { Service } from "fastify-decorators";
 import { randomUUID } from "node:crypto";
 import type { Readable } from "node:stream";
+import { buffer } from "node:stream/consumers";
 import {
   StorageProvider,
   type FileMetaData,
   type UploadFile,
 } from "./storage.js";
-
 @Service()
 export class S3Storage extends StorageProvider {
-  cliente = new S3Client({ region: process.env.AWS_REGION ?? "us-east-1" });
+  cliente = new S3Client({ region: process.env.AWS_REGION ?? "us-east-2" });
   async upload(file: UploadFile): Promise<FileMetaData> {
     const id = randomUUID();
+    const fileBuffer = await buffer(file.stream as Readable);
     await this.cliente.send(
       new PutObjectCommand({
+        ContentLength: fileBuffer.length,
         Bucket: process.env.AWS_BUCKET,
         Key: id,
-        Body: file.stream as Readable,
+        Body: fileBuffer,
       }),
     );
 
