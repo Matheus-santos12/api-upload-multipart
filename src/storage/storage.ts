@@ -8,6 +8,7 @@ export interface FileMetaData {
   id: string;
   name: string;
   size: number;
+  url: string;
 }
 
 export abstract class StorageProvider {

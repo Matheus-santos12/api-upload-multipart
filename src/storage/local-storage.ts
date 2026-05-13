@@ -14,7 +14,12 @@ export class LocalStorage extends StorageProvider {
     const id = randomUUID();
     await pipeline(file.stream, createWriteStream(`./uploads/${id}`));
 
-    return { id, name: file.name, size: file.size };
+    return {
+      id,
+      name: file.name,
+      size: file.size,
+      url: `http://localhost:3333/uploads/${id}`,
+    };
   }
   async delete(id: string): Promise<void> {
     const filePath = `./uploads/${id}`;

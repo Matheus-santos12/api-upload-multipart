@@ -27,7 +27,12 @@ export class S3Storage extends StorageProvider {
       }),
     );
 
-    return { id, name: file.name, size: file.size };
+    return {
+      id,
+      name: file.name,
+      size: file.size,
+      url: `https://api-upload-multipart-matheus.s3.us-east-2.amazonaws.com/${id}`,
+    };
   }
 
   async delete(id: string) {

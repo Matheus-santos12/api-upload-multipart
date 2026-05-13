@@ -2,7 +2,7 @@ import multipart from "@fastify/multipart";
 import "dotenv/config";
 import Fastify from "fastify";
 import { bootstrap } from "fastify-decorators";
-import FileController from "./controllers/file-controller.js";
+import { loadControllers } from "./controllers/load-controller.js";
 import { registerDependencies } from "./di-registry.js";
 
 registerDependencies();
@@ -16,6 +16,6 @@ app.get("/", function (request, reply) {
 });
 
 app.register(multipart);
-app.register(bootstrap, { controllers: [FileController] });
+app.register(bootstrap, { controllers: loadControllers() });
 
 await app.listen({ port: 3333 });
